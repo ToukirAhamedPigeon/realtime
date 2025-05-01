@@ -5,7 +5,7 @@ import { getDocument } from '@/lib/actions/room.actions';
 import { getClerkUsers } from '@/lib/actions/user.action';
 
 const Document = async ({ params }: SearchParamProps) => {
-  const { id } = await params;
+  const { id } = params;
   const clerkUser = await currentUser();
   if(!clerkUser) return redirect("/sign-in");
   const room = await getDocument({
