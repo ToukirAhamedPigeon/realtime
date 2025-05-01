@@ -41,4 +41,5 @@ Packages Used
 2. Copied Resources from Adrian Github Repository
     2.1 global.css
     2.2 tailwind.config.ts
+    2.3 Public Assets Folder
 3. JSM Editor
