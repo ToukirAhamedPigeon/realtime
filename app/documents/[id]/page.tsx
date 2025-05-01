@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { getDocument } from '@/lib/actions/room.actions';
 import { getClerkUsers } from '@/lib/actions/user.action';
 
-const Document = async ({ params }: SearchParamProps) => {
+const Document = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const clerkUser = await currentUser();
   if(!clerkUser) return redirect("/sign-in");
