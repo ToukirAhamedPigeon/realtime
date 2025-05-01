@@ -43,3 +43,6 @@ Packages Used
     2.2 tailwind.config.ts
     2.3 Public Assets Folder
 3. JSM Editor
+4. Clerk
+5. LiveBlocks
+    5.1 Authentication with Next JS: https://liveblocks.io/docs/authentication/id-token/nextjs
