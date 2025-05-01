@@ -17,7 +17,7 @@ export const createDocument = async ({userId, email}:CreateDocumentParams) => {
        };
        const room = await liveblocks.createRoom(roomId,{
         metadata,
-        defaultAccesses:[],
+        defaultAccesses:['room:write'],
         usersAccesses,
        });
        revalidatePath("/");
@@ -26,5 +26,43 @@ export const createDocument = async ({userId, email}:CreateDocumentParams) => {
     catch(error){
         console.error(error);
         throw new Error("Failed to create room");
+    }
+}
+
+export const getDocuments = async ({email}:{email:string}) => {
+    try{
+        const rooms = await liveblocks.getRooms({userId:email});
+        return parseStringify(rooms);
+    }
+    catch(error){
+        console.error(error);
+        throw new Error("Failed to get rooms");
+    }
+}
+
+export const getDocument = async ({roomId,userId}:{roomId:string,userId:string}) => {
+    try{
+        const room = await liveblocks.getRoom(roomId);
+        // const hasAccess = Object.keys(room.usersAccesses).includes(userId);
+        // if(!hasAccess) throw new Error("You don't have access to this room");
+        return parseStringify(room);
+    }
+    catch(error){
+        console.error(error);
+        throw new Error("Failed to get room");
+    }
+}
+
+export const updateDocument = async ({roomId,title}:{roomId:string,title:string})=>{
+    try{
+        const updatedRoom = await liveblocks.updateRoom(roomId,{
+            metadata:{title}
+        });
+        revalidatePath(`/document/${roomId}`);
+        return parseStringify(updatedRoom);
+    }
+    catch(error){
+        console.error(error);
+        throw new Error("Failed to update room");
     }
 }

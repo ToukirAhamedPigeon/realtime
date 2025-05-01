@@ -35,9 +35,13 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+**Here Document = Live Blocks Channel Room**
 Packages Used
 1. ShadCN UI
     1.1 Button
+    1.2 Input
+    1.3 Dialog
+    1.4 Label
 2. Copied Resources from Adrian Github Repository
     2.1 global.css
     2.2 tailwind.config.ts
@@ -46,3 +50,5 @@ Packages Used
 4. Clerk
 5. LiveBlocks
     5.1 Authentication with Next JS: https://liveblocks.io/docs/authentication/id-token/nextjs
+    5.2 lexical rich text
+6. Sentry
