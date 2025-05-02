@@ -1,11 +1,15 @@
+import * as React from 'react'
 import CollaborativeRoom from '@/components/CollaborativeRoom'
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { getDocument } from '@/lib/actions/room.actions';
 import { getClerkUsers } from '@/lib/actions/user.action';
 
-const Document = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+
+const Document = async ({ params }: {
+  params: Promise<{ id: string }>
+}) => {
+  const { id } = await params;
   const clerkUser = await currentUser();
   if(!clerkUser) return redirect("/sign-in");
   const room = await getDocument({
