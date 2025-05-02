@@ -42,6 +42,7 @@ Packages Used
     1.2 Input
     1.3 Dialog
     1.4 Label
+    1.5 Popover
 2. Copied Resources from Adrian Github Repository
     2.1 global.css
     2.2 tailwind.config.ts

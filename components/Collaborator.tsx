@@ -2,16 +2,40 @@ import Image from 'next/image';
 import React, { useState } from 'react'
 import UserTypeSelector from './UserTypeSelector';
 import { Button } from './ui/button';
+import { removeCollaborator, updateDocumentAccess } from '@/lib/actions/room.actions';
 
 const Collaborator = ({roomId,creatorId,email,collaborator,user}:CollaboratorProps) => {
     const [userType,setUserType] = useState<UserType>(collaborator.userType || 'viewer');
     const [loading,setLoading] = useState(false);
 
-    const shareDocumentHandler = async(type:string)=>{}
-    const removeCollaboratorHandler = async(email:string)=>{}
-    
+    const shareDocumentHandler = async(type:string)=>{
+        try {
+            setLoading(true);
+            await updateDocumentAccess({
+                roomId,
+                email,
+                userType:type as UserType,
+                updatedBy:user
+            });
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    const removeCollaboratorHandler = async(email:string)=>{
+        try {
+            setLoading(true);
+            await removeCollaborator({
+                roomId,
+                email
+            });
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
   return (
-    <li className="flex items-center justify-between gap-2 py-3">
+    <li className="flex items-center justify-between gap-2 py-3 ">
         <div className="flex gap-2">
             <Image src={collaborator.avatar} alt={collaborator.name} width={36} height={36} className='size-9 rounded-full' />
             <div>
@@ -29,7 +53,7 @@ const Collaborator = ({roomId,creatorId,email,collaborator,user}:CollaboratorPro
         ) : (
             <div className='flex items-center'>
                 <UserTypeSelector userType={userType} setUserType={setUserType || 'viewer'} onClickHandler={shareDocumentHandler}/>
-                <Button type='button' onClick={()=>removeCollaboratorHandler(collaborator.email)}>Remove</Button>
+                <Button type='button' variant='destructive' className='text-red-500' onClick={()=>removeCollaboratorHandler(collaborator.email)}>Remove</Button>
             </div>
         )}
     </li>

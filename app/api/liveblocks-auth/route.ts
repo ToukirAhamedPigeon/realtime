@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     id: clerkUser.id,
     info:{
         id,
-        name: `${firstName} ${lastName}`,
+        name: (lastName) ? `${firstName} ${lastName}` : firstName,
         email: emailAddresses[0].emailAddress,
         avatar: imageUrl,
         color: getUserColor(id),
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       userId: user.info.email,
       groupIds:[], // Optional
     },
-    { userInfo: user.info },
+    { userInfo: user.info as User },
   );
 
   return new Response(body, { status });

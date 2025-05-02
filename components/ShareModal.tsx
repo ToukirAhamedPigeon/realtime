@@ -15,6 +15,7 @@ import { Label } from './ui/label';
 import { Input } from './ui/input';
 import UserTypeSelector from './UserTypeSelector';
 import Collaborator from './Collaborator';
+import { updateDocumentAccess } from '@/lib/actions/room.actions';
   
 
 const ShareModal = ({roomId,collaborators,creatorId,currentUserType}:ShareDocumentDialogProps) => {
@@ -23,7 +24,20 @@ const ShareModal = ({roomId,collaborators,creatorId,currentUserType}:ShareDocume
     const [loading,setLoading] = useState(false);
     const [email,setEmail] = useState('');
     const [userType,setUserType] = useState<UserType>('viewer');
-    const shareDocumentHandler = async()=>{}
+    const shareDocumentHandler = async()=>{
+        try {
+            setLoading(true);
+            await updateDocumentAccess({
+                roomId,
+                email,
+                userType:userType as UserType,
+                updatedBy:user?.info as User
+            });
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+        }   
+    }
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
@@ -38,8 +52,8 @@ const ShareModal = ({roomId,collaborators,creatorId,currentUserType}:ShareDocume
             <DialogDescription className=''>Select which users can view and edit this document.</DialogDescription>
             </DialogHeader>
             <Label htmlFor='email' className='mt-6 text-blue-100'>Email Address</Label>
-            <div className="flex items-center gap-3">
-                <div className="flex flex-1 rounded-md bg-dark-400">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                <div className="flex  flex-1 gap-2 rounded-md bg-dark-400 p-2">
                     <Input id='email' type='email' placeholder='Enter email address' value={email} onChange={(e)=>setEmail(e.target.value)} className='share-input' />
                     <UserTypeSelector userType={userType} setUserType={setUserType} />
                 </div>
