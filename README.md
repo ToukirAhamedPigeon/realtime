@@ -59,34 +59,31 @@ Packages Used
     5.3 Live Blocks Authentication with Clerk
         Authenticated Users only should collaborate in the room. app/api/liveblocks-auth, LiveblocksProvider
     5.4 Collaborative Editor Room
-        Define document Editor page as a Liveblocks Room. components/editor/Editor.tsx Modified
+        Define document Editor page as a Liveblocks Room. components/editor/Editor.tsx Modified. useOthers() (get other users in room)
     5.5 Edit Document Title Feature
         Edit Document Title Feature and update Liveblocks meta. lib/actions/room.action.ts
     5.6 List All Documents on HomePage
         Fetch All Documents or room from liveblocks Storage and Show in Home Page As List. Clerk Authentication is required to view the list. lib/actions/room.action.ts
     5.7 Live Features with Floating Comments
-        Addded floating comment after selecting a portion of text. Added Floating Toolbar Component in components/editor/plugins/FloatingToolbar.tsx
+        Addded floating comment after selecting a portion of text. Added Floating Toolbar Component in components/editor/plugins/FloatingToolbar.tsx.  LiveblocksPlugin, FloatingComposer,  FloatingThreads (For Floating Comments), useThreads() (Define a message or comment section)
     5.8 Sticky Comments
-        Set Sticky comment right side of the screen to view all comments together. Resolve Functionality of unread comments.
+        Set Sticky comment right side of the screen to view all comments together. Resolve Functionality of unread comments. Thread and Composer (for Comment UI), useThreads() (Define a message or comment section)
     5.9 User Mention Feature
-        Mention Users with @ before comment
+        Mention Users with @ before comment. useOthers() (get other users in room)
     5.10 Share Modal
-        Share Document or room via Gmail to others
+        Share Document or room via Gmail to others. useOthers() (get other users in room)
     5.11 User Permissions (View, Edit)
         Access Permission to the shared Person to edit or only view the document
     5.12 Delete Modal & Feature
         Delete Document Functionalities
     5.13 Notifications Feature
-        Send Notification on Mentioning in comment or Share a Document.
+        Send Notification on Mentioning in comment or Share a Document. InboxNotification (InboxNotification.Thread,InboxNotification.TextMention, InboxNotification.Custom, InboxNotification.Icon ),  InboxNotificationList, LiveblocksUIConfig  For Notifications UI 
     5.14 All build in libraries is in Liveblocks
-        RoomProvider (Provide A Collaborative Room) , ClientSideSuspense (Show Loader when Fetch Room Collaborative Data), liveblocksConfig (Wrap Editor Config with LiveBlocks Config), LexicalComposer (Wrap Editor JSX with  LexicalComposer), LiveblocksPlugin, FloatingComposer,  FloatingThreads (For Floating Comments), Thread and Composer (for Comment UI), InboxNotification (InboxNotification.Thread,InboxNotification.TextMention, InboxNotification.Custom, InboxNotification.Icon ),  InboxNotificationList, LiveblocksUIConfig  For Notifications UI 
+        RoomProvider (Provide A Collaborative Room) , ClientSideSuspense (Show Loader when Fetch Room Collaborative Data), liveblocksConfig (Wrap Editor Config with LiveBlocks Config), LexicalComposer (Wrap Editor JSX with  LexicalComposer), LiveblocksPlugin, FloatingComposer,  FloatingThreads (For Floating Comments), Thread and Composer (for Comment UI), InboxNotification (InboxNotification.Thread,InboxNotification.TextMention, InboxNotification.Custom, InboxNotification.Icon),  InboxNotificationList, LiveblocksUIConfig  For Notifications UI 
     5.15 room.action.ts
         createDocument (liveblocks.createRoom), getDocuments (liveblocks.getRooms), getDocument (liveblocks.getRoom), updateDocument (liveblocks.updateRoom), deleteDocument (usersAccesses:RoomAccesses, liveblocks.updateRoom ), updateDocumentAccess (liveblocks.updateRoom, liveblocks.triggerInboxNotification), removeCollaborator (liveblocks.getRoom,await liveblocks.updateRoom(roomId, usersAccesses:) ), deleteDocument (liveblocks.deleteRoom(roomId))
     5.16 user.action.ts
         getClerkUsers (clerkClient, clerk.users.getUserList ) , getDocumentUsers (liveblocks.getRoom, Object.keys(room.usersAccesses))
     5.17 LiveBlocks Hooks
         useOthers() (get other users in room), useThreads() (Define a message or comment section), useInboxNotifications(), useUnreadInboxNotificationsCount() (For get Notifications)
-        
-
-
 6. Sentry
